@@ -1,13 +1,28 @@
-# CSC 173 Project 1
+Sources=Main.c
+Executable=Project1
 
-PROGRAMS = FiniteAutomata
+CFlags=-c -Wall -g -Iinc
+LDFlags=
+ObjectDir=Source/Bin/
+SourceDir=Source/
+BinDir=
 
-CFLAGS = -g
+CC=gcc
+RM=rm
 
-programs: $(PROGRAMS)
+Objects=$(Sources:.c=.o)
+CSources=$(addprefix $(SourceDir),$(Sources))
+CObjects=$(addprefix $(ObjectDir),$(Objects))
+CExecutable=$(addprefix $(BinDir),$(Executable))
 
-FiniteAutomata: FiniteAutomata
+all: $(CSources) $(CExecutable)
+
+$(CExecutable): $(CObjects)
+	$(CC) $(LDFlags) $(CObjects) -o $@
+
+$(ObjectDir)%.o: $(SourceDir)%.c
+	$(CC) $(CFlags) $< -o $@
 
 clean:
-	-rm $(PROGRAMS) *.o
-	-rm -r *.dSYM
+	$(RM) $(CObjects)
+	$(RM) $(CExecutable)

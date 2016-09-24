@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char **argv) {
 
-    printf("----------------------------\n");
+    printf("----------------------------------\n");
+    printf("CSC 173 - Project 1\n");
+    printf("Chris Dalke\n");
+    printf("----------------------------------\n");
+/*
     printf("Input File: \n");
     printf("----------------------------\n");
     printf("Loading................ DONE \n");
@@ -19,22 +24,69 @@ int main(int argc, char **argv) {
     printf("2/2 Test Cases match! \n");
     printf("----------------------------\n");
 
+*/
 
-    //If we have zero input arguments, display error and help
+    //Loop through all the command line arguments, saving any arguments that are important to us.
+    //Default arguments:
+    char *helpArg = "--help";
+    char *inputArg = "-I";
+    //char *outputArg = "-O";
+    char *convertArg = "-C";
+
+    char *inputFile;
+    int helpMode = 0;
+    int inputMode = 0;
+    int outputMode = 0;
+    int convertMode = 0;
+
+    for (int i = 0; i < argc; i++){
+        if (strcmp(argv[i],helpArg) == 0){
+            //Set the help-mode flag
+            helpMode = 1;
+        }
+        if (strcmp(argv[i],inputArg) == 0){
+            //Make sure next item is in bounds before saving it as the input file
+            if ((i+1)<argc){
+                inputFile = argv[i+1];
+                inputMode = 1;
+            }
+        }
+
+    }
+
+    //If we are in help-mode, print the help and then exit.
+    if (helpMode == 1){
+        printf("Command-Line Options:\n");
+        printf("--help: Displays this help text.\n");
+        printf("-I <Input File>: Sets the input filename (Required)\n");
+        printf("-C: Enables NFA->DFA Conversion mode (Optional)\n");
+    } else {
+        //Not help mode, handle the loading
+        if (inputMode == 1){
+            printf("Input File: %s\n\n",inputFile);
+            //Try to open our input file
+            FILE *fp;
+            fp = fopen(inputFile,"r");
+            printf("Loading................ ");
+            if (fp != NULL){
+                //Hand off this data to the parser function which will read the file and simulate it
+                printf(" DONE\n");
+                printf("Parsing................ \n");
 
 
-    //Check if we used the --help argument
+
+            } else {
+                printf(" ERROR\n");
+                printf("Error: Could not open file. \nPlease read README.txt for help!\n");
+            }
+            fclose(fp);
+
+        } else {
+            printf("Error: Could not understand command-line arguments. Use --help to view options.");
+        }
+    }
 
 
-    //Check if we have an input filename
-    //I've created an NFA/DFA parsing system
-
-    //Check if we are solving or converting
-    //If we solve, just load up the file and run the test cases
-    //If we convert, load up the file, convert to DFA, run test cases on both 
-    //And if we want, save the DFA to either the standard output or to a latex-encoded file
-
-
-
+    printf("----------------------------------\n");
 
 }
