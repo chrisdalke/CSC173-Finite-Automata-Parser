@@ -1,4 +1,4 @@
-Sources=Main.c
+Sources=Main.c LinkedList.c DFA.c NFA.c IntSet.c NFAConverter.c
 Executable=Project1
 
 CFlags=-c -Wall -g -Iinc

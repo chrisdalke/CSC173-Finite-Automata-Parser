@@ -1,0 +1,12 @@
+size:3
+join:0,a,1
+join:1,b,2
+join:2,*,2
+goal:2
+test:ab
+test:abab
+test:caba
+test:abcd
+test:abcdefg
+test:a
+test:abc

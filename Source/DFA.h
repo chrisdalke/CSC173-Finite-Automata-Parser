@@ -8,6 +8,10 @@
 #ifndef _dfa_h_gf
 #define _dfa_h_gf
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 // Could also use <stdbool.h> and true/false
 #ifndef TRUE
 # define TRUE 1
@@ -15,6 +19,9 @@
 #ifndef FALSE
 # define FALSE 0
 #endif
+
+//Debug trace
+#define DFA_DEBUG_TRACE 0
 
 // Assume input is 7-bit US-ASCII characters
 #define DFA_NSYMBOLS 128
@@ -47,6 +54,7 @@ extern int DFA_get_transition(DFA *dfa, int statenum, char symbol);
 extern void DFA_set_transition(DFA *dfa, int src, char symbol, int dst);
 extern void DFA_set_transition_str(DFA *dfa, int src, char *str, int dst);
 extern void DFA_set_transition_all(DFA *dfa, int src, int dst);
+extern void DFA_set_transition_all_except(DFA *dfa, int src, char *str, int dst);
 
 extern int DFA_get_current_state(DFA *dfa);
 extern void DFA_set_current_state(DFA *dfa, int statenum);

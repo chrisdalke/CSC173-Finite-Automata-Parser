@@ -1,0 +1,14 @@
+size:2
+join:0,*,0
+join:1,*,1
+join:0,1,1
+join:1,1,0
+goal:0
+test:00000
+test:01010
+test:11011
+test:11011
+test:10001
+test:11010
+test:10000
+test:11111
